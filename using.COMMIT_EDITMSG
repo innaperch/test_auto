@@ -1,0 +1,28 @@
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NUnitTP
+{
+    public class Tests
+
+    {
+        IWebDriver driver;
+
+        [SetUp]
+        public void Setup()
+        {
+            driver = new ChromeDriver("C:\\Program Files");
+            driver.Navigate().GoToUrl("https://lipsum.com/");
+        }
+
+        [Test]
+        public void Verify_the_presence()
+        {
+            driver.FindElement(By.LinkText("Pyccкий")).Click();
+            IWebElement firstblock = driver.FindElement(By.XPath("//*[@id='Panes']/div[1]/p"));
+            Assert.IsTrue(firstblock.Text.Contains("рыба"));
+            Assert.Pass();
